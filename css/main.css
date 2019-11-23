@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap");
+:root {
+  --light-background: #fff;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Sulphur Point', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-size: 16px;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  height: 100vh;
+}
+
+.center {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.round-corner-small {
+  border-radius: 0.2em;
+}
+
+.round-corner-medium {
+  border-radius: 0.4em;
+}
+
+button {
+  padding: 1em 2em;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.4em;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  -webkit-transition: -webkit-box-shadow 0.4s ease;
+  transition: -webkit-box-shadow 0.4s ease;
+  transition: box-shadow 0.4s ease;
+  transition: box-shadow 0.4s ease, -webkit-box-shadow 0.4s ease;
+}
+
+.blue-purple {
+  color: white;
+  background: linear-gradient(45deg, #0056A1, #9B77FF);
+}
+
+#main-card {
+  position: relative;
+  -webkit-box-shadow: 0 24px 48px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 24px 48px rgba(0, 0, 0, 0.24);
+  background: var(--light-background);
+  overflow: hidden;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 40% 60%;
+      grid-template-columns: 40% 60%;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+      grid-template-areas: 'left right';
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 80vw;
+  height: 60vh;
+}
+
+#main-card #circle1 {
+  position: absolute;
+  right: -6em;
+  top: -10em;
+  z-index: 0;
+  width: 30%;
+}
+
+#main-card #circle2 {
+  position: absolute;
+  left: calc(40% - 4em);
+  bottom: -4em;
+  z-index: 2;
+  width: 8em;
+}
+
+#main-card #left {
+  position: relative;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: url(../images/headphones.jpg) no-repeat fixed center;
+  background-size: cover;
+  z-index: 1;
+}
+
+#main-card #left .overlay {
+  background: rgba(0, 0, 0, 0.64);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+#main-card #left #logo {
+  -webkit-transform: translate(2em, 2em);
+          transform: translate(2em, 2em);
+  height: 2em;
+  width: 40%;
+  z-index: 2;
+}
+
+#main-card #right {
+  z-index: 1;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: right;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  padding: 2em 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#main-card #right h3, #main-card #right h4 {
+  font-weight: normal;
+  text-align: center;
+  width: 100%;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+#main-card #right button:hover {
+  -webkit-box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.32);
+          box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.32);
+}
+
+#main-card #right .icon-container {
+  width: 6em;
+  height: 6em;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  display: flexbox;
+  text-align: center;
+  padding: 1em;
+  -webkit-box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16);
+          box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16);
+}
+
+#main-card #right #select-file {
+  display: none;
+}
+
+@media screen and (min-width: 1280px) {
+  #main-card {
+    height: 90vh;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  #main-card {
+    height: 100vh;
+    width: 100vw;
+    border-radius: 0;
+  }
+}
+/*# sourceMappingURL=main.css.map */
