@@ -48,3 +48,32 @@ src = "audios/audio1.mp3"
 src = convert_mp3_to_wav(src)
 
 """
+
+from os import path
+from pydub import AudioSegment
+
+def make_dst(src):
+    i = len(src) - 1
+    while(i >= 0):
+        if(src[i] == '.'):
+            dot = i
+        i -= 1
+    
+    dst = ""
+    
+    for i in  range(0,dot):
+        dst += src[i]
+    dst  = dst + "_raw.raw"
+    return dst
+
+def convert_mp3_to_raw(src):
+    # files                                                                         
+    dst = make_dst(src)
+    print(src + "\n" + dst)
+    # convert wav to mp3                                                            
+    sound = AudioSegment.from_mp3(src)
+    sound.export(dst, format="raw")
+    return dst
+src = "audios/audio1.mp3"
+src = convert_mp3_to_raw(src)
+
