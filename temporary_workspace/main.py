@@ -11,10 +11,10 @@
 6 -> Send the Path to the Web App
 
 """
-def convert_mp3_to_wav(src):
-    from os import path
-    from pydub import AudioSegment
+from os import path
+from pydub import AudioSegment
 
+def convert_mp3_to_wav(src):
     # files                                                                         
     dst = make_dst(src)
     print(src + "\n" + dst)
@@ -37,7 +37,15 @@ def make_dst(src):
     dst  = dst + "_wav.wav"
     return dst
 
+src = "audios/audio1.mp3"
+src = convert_mp3_to_wav(src)
 
+
+
+"""
+Audio 1 - 700  : 2000
+Audio 2 - 3000 : end
+"""
 
 #Next Tasks
 #1 Read the Audio File
