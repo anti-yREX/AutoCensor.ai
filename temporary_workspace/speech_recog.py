@@ -1,32 +1,43 @@
-import io
-import os
+def speech_recognition(file_name):
+  import io
+  import os
+  from google.cloud import speech
+  from google.cloud.speech import enums
+  from google.cloud.speech import types
 
-# Imports the Google Cloud client library
-from google.cloud import speech
-from google.cloud.speech import enums
-from google.cloud.speech import types
+  client = speech.SpeechClient()
 
-# Instantiates a client
-client = speech.SpeechClient()
+  with io.open(file_name, 'rb') as audio_file:
+      content = audio_file.read()
+      audio = types.RecognitionAudio(content=content)
 
-# The name of the audio file to transcribe
-file_name = "audios/audio1_raw.raw"
+  config = types.RecognitionConfig(
+      encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
+      sample_rate_hertz=44100,
+      language_code='en-US',
+      enable_word_time_offsets=True)
 
-print(file_name)
+  response = client.recognize(config, audio)
+  return response
 
-# Loads the audio into memory
-with io.open(file_name, 'rb') as audio_file:
-    content = audio_file.read()
-    audio = types.RecognitionAudio(content=content)
+""" #  Speech Recognition - No Time Offset
+  import speech_recognition as sr
 
+  AUDIO_FILE = ("audios/audio_wav.wav") 
+
+  r = sr.Recognizer()
+
+  with sr.AudioFile(AUDIO_FILE) as source:
+      audio = r.record(source)
+
+  arr = r.recognize_google(audio,show_all=True)
+
+  try:
+      print("Audio Contents:\n" + str(arr))
+
+  except sr.UnknownValueError:
+      print("Google Speech Cannotbe recognised")
+
+  except sr.RequestError as e:
+      print("Could not request results from Google Speech RecognitionServive; {0}".format(e))
 """
-config = types.RecognitionConfig(
-    encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
-    sample_rate_hertz=16000,
-    language_code='en-US')
-
-# Detects speech in the audio file
-response = client.recognize(config, audio)
-
-for result in response.results:
-    print('Transcript: {}'.format(result.alternatives[0].transcript))"""

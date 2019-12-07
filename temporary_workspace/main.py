@@ -1,18 +1,26 @@
-"""
+"""  ===> TO DO
 
-===> TO DO
+        0 -> Receive Request
 
-1 -> Read the Audio File (Done)
-    1.1-> If audio in .mp3 convert to .wav  (Done) (Saved in temp.py)
-2 -> Run it on speech to text API
-3 -> Check the Transcript for Wrong Words
-4 -> Edit the Audio File (Done)
-5 -> Save the File (Done)
-6 -> Save the marked word into a JSON text file
+        1 -> Read the Audio File (Done)
+            1.1-> If audio in .mp3 convert to .wav  (Done) (Saved in temp.py)
+        2 -> Run it on speech to text API (Done)
+        3 -> Check the Transcript for UnWanted Words (Done)
+        4 -> Edit the Audio File (Done)
 
+        5 -> Save the File (Done)
+        6 -> Convert Output in a JSON
+
+        Last -> Send Back Response
+
+        More:-
+            Speech Recognition Error Handling
+ 
 """
 
 import wave
+
+from speech_recog import speech_recognition
 def make_dst(src):
     i = len(src) - 1
     while(i >= 0):
@@ -48,7 +56,7 @@ def beep(src, strt, end):
 
     while(t.tell() <= ed):
         b.setpos(0)
-        t.writeframes(b.readframes(50))
+        t.writeframes(b.readframes(10000))
 
     a.setpos(ed)
     t.writeframes(a.readframes(a.getnframes()-ed))
@@ -59,10 +67,35 @@ def beep(src, strt, end):
     a.close()
     return dst
 
-src = "audios/audio1_wav.wav"
-src = beep(src, 0.983, 2.1)
-print(src)
+def check_language(rslt):
+    chk_list = {'milliseconds'}
+    flg = 0
+    word_list = rslt.results[0].alternatives[0].words
+    len_word_list= len(word_list)
+    n = None
+    for  i in range(0,len_word_list):
+        if word_list[i].word in chk_list:
+            flg = 1
+            n = i
+            break
+    
+    print(n)
+    print(word_list[n])
+    st = word_list[n].start_time.seconds + (word_list[n].start_time.nanos/1000000000)
+    ed = word_list[n].end_time.seconds + (word_list[n].end_time.nanos/1000000000)
+    print(st)
+    print(ed)
+    return flg, st, ed
 
 
+def compute(src):
+    rslt = speech_recognition(src)
+    flg , st, ed =  check_language(rslt)
+    if(flg==1):
+        src = beep(src, st, ed)
+        print(src)
+    #Make rslt to json
 
-#Next Tasks
+if __name__ == "__main__":
+    compute("audios/audio1_wav.wav")
+    pass
