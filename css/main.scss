@@ -71,58 +71,66 @@ button{
         z-index: 2;
         width: 8em;
     }
-    #left{
-        position: relative;
-        grid-area: left;
-        display: flex;
-        background: url(../images/headphones.jpg) no-repeat fixed center;
-        background-size: cover;
+}
+#left{
+    position: relative;
+    grid-area: left;
+    display: flex;
+    background: url(/images/headphones.jpg) no-repeat center;
+    background-size: cover;
+    z-index: 1;
+    .overlay{
+        background: rgba(0, 0, 0, 0.64);
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
         z-index: 1;
-        .overlay{
-            background: rgba(0, 0, 0, 0.64);
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            z-index: 1;
-        }
-        #logo{
-            transform: translate(2em, 2em);
-            height: 2em;
-            width: 40%;
-            z-index: 2;
-        }
     }
-    #right{
-        z-index: 1;
-        grid-area: right;
-        justify-content: center;
-        align-content: center;
-        padding: 2em 1em;
-        display: flex;
-        flex-wrap: wrap;
-        h3,h4{
-            font-weight: normal;
-            text-align: center;
-            width: 100%;
-            align-self: flex-start;
-        }
-        button:hover{
-            box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.32);
-        }
-        .icon-container{
-            width: 6em;
-            height: 6em;
-            align-self: flex-start;
-            display: flexbox;
-            text-align: center;
-            padding: 1em;
-            box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16);
-        }
-        #select-file{
-            display: none;
-        }
+    #logo{
+        transform: translate(2em, 2em);
+        height: 2em;
+        width: 40%;
+        z-index: 2;
+    }
+}
+#right{
+    z-index: 1;
+    grid-area: right;
+    justify-content: center;
+    align-content: center;
+    padding: 2em 1em;
+    display: flex;
+    flex-wrap: wrap;
+    h3,h4{
+        font-weight: normal;
+        text-align: center;
+        width: 100%;
+        align-self: flex-start;
+    }
+    button:hover{
+        box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.32);
+    }
+    .icon-container{
+        width: 6em;
+        height: 6em;
+        align-self: flex-start;
+        display: flexbox;
+        text-align: center;
+        padding: 1em;
+        box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.16);
+    }
+    .hide{
+        display: none;
+    }
+    audio{
+        width: 100%;
+        margin: 1em;
+
+    }
+    section{
+        width: 100%;
     }
 }
 
@@ -137,5 +145,20 @@ button{
         height: 100vh;
         width: 100vw;
         border-radius: 0;
+        overflow-y: auto;
+        grid-template-columns: 100%;
+        grid-template-rows: 6em auto;
+        grid-template-areas: 
+            'left'
+            'right';
+        #left{
+            grid-area: left;
+        }
+        #right{
+            grid-area: right;
+        }
+    }
+    .hide-on-mobile{
+        display: none;
     }
 }

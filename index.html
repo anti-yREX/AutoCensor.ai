@@ -10,13 +10,15 @@
         <meta name="description" content="This website can auto censor audio file.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/main.css">
+        <script src="main.js" async defer></script>
+        <script src="jquery.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div id="main-card" class="round-corner-medium">
-                <svg id="circle1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 558 558">
+                <svg class="hide-on-mobile" id="circle1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 558 558">
                     <defs>
                       <linearGradient id="linear-gradient" x1="1.022" y1="0.063" x2="0.022" y2="0.936" gradientUnits="objectBoundingBox">
                         <stop offset="0" stop-color="#beefff"/>
@@ -25,7 +27,7 @@
                     </defs>
                     <circle id="Ellipse_1" data-name="Ellipse 1" cx="279" cy="279" r="279" fill="url(#linear-gradient)"/>
                   </svg>  
-                  <svg id="circle2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 558 558">
+                  <svg class="hide-on-mobile" id="circle2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 558 558">
                     <defs>
                       <linearGradient id="linear-gradient2" x1="1.022" y1="0.063" x2="0.022" y2="0.936" gradientUnits="objectBoundingBox">
                         <stop offset="0" stop-color="#FFBEEB"/>
@@ -43,34 +45,37 @@
             </div>
 
             <div id="right" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
-                <div class="icon-container round-corner-medium">
+                <div class="hide-on-drop icon-container round-corner-medium">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="58.52" viewBox="0 0 48 58.52">
                             <defs>
-                              <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+                              <linearGradient id="linear-gradient3" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
                                 <stop offset="0" stop-color="#3ba4ff"/>
                                 <stop offset="1" stop-color="#09ff6b"/>
                               </linearGradient>
                             </defs>
-                            <g id="Group_1" data-name="Group 1" opacity="0.8">
-                              <rect id="Rectangle_3" data-name="Rectangle 3" width="4.02" height="58.52" rx="2.01" transform="translate(0)" fill="url(#linear-gradient)"/>
-                              <rect id="Rectangle_3-2" data-name="Rectangle 3" width="4.02" height="35.291" rx="2.01" transform="translate(8.934 11.615)" fill="url(#linear-gradient)"/>
-                              <rect id="Rectangle_3-3" data-name="Rectangle 3" width="4.02" height="44.225" rx="2.01" transform="translate(17.869 7.147)" fill="url(#linear-gradient)"/>
-                              <rect id="Rectangle_3-4" data-name="Rectangle 3" width="3.91" height="24.195" rx="1.955" transform="translate(26.493 17.23)" fill="url(#linear-gradient)"/>
-                              <rect id="Rectangle_3-5" data-name="Rectangle 3" width="4.02" height="14.742" rx="2.01" transform="translate(35.291 21.889)" fill="url(#linear-gradient)"/>
-                              <rect id="Rectangle_3-6" data-name="Rectangle 3" width="3.91" height="31.527" rx="1.955" transform="translate(44.09 13.564)" fill="url(#linear-gradient)"/>
+                            <g id="Group" data-name="Group 1" opacity="0.8">
+                              <rect id="Rectangle_3" data-name="Rectangle 3" width="4.02" height="58.52" rx="2.01" transform="translate(0)" fill="url(#linear-gradient3)"/>
+                              <rect id="Rectangle_3-2" data-name="Rectangle 3" width="4.02" height="35.291" rx="2.01" transform="translate(8.934 11.615)" fill="url(#linear-gradient3)"/>
+                              <rect id="Rectangle_3-3" data-name="Rectangle 3" width="4.02" height="44.225" rx="2.01" transform="translate(17.869 7.147)" fill="url(#linear-gradient3)"/>
+                              <rect id="Rectangle_3-4" data-name="Rectangle 3" width="3.91" height="24.195" rx="1.955" transform="translate(26.493 17.23)" fill="url(#linear-gradient3)"/>
+                              <rect id="Rectangle_3-5" data-name="Rectangle 3" width="4.02" height="14.742" rx="2.01" transform="translate(35.291 21.889)" fill="url(#linear-gradient3)"/>
+                              <rect id="Rectangle_3-6" data-name="Rectangle 3" width="3.91" height="31.527" rx="1.955" transform="translate(44.09 13.564)" fill="url(#linear-gradient3)"/>
                             </g>
                           </svg>                          
                 </div>
-                <h3>Drag and drop audio file</h3>
-                <h4>or</h4>
-                <button id="grab-file" class="blue-purple">Select from local storage</button>
-                <input type="file" id="select-file"/>
-                <h3 id="file-name"></h3>
+                <h3 class="hide-on-drop hide-on-mobile">Drag and drop audio file</h3>
+                <h3 class="hide-on-drop" id="file-name"></h3>
+                <section class="show-on-drop hide">
+                    <h3><span id="audio_name"></span>Original audio file</h3>
+                    <audio controls>
+                      <sourc id="original_audio" src="" type="audio/wav">
+                    </audio> 
+                    <h3>Censored audio file</h3>
+                    <audio controls>
+                        <source id="censored_audio" src="" type="audio/wav">
+                    </audio>
+                </section>
             </div>
-
         </div>
-
-
-        <script src="main.js" async defer></script>
     </body>
 </html>
