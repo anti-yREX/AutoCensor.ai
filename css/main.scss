@@ -76,7 +76,7 @@ button{
     position: relative;
     grid-area: left;
     display: flex;
-    background: url(/images/headphones.jpg) no-repeat center;
+    background: url(../images/headphones.jpg) no-repeat center;
     background-size: cover;
     z-index: 1;
     .overlay{
@@ -142,7 +142,7 @@ button{
     }
     .rotate{
         animation: rot 1s ease infinite;
-        opacity: 1;
+        opacity: 1 !important;
     }
     @keyframes rot{
         0%{

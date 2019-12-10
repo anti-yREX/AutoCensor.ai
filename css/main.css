@@ -94,7 +94,7 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background: url(/images/headphones.jpg) no-repeat center;
+  background: url(../images/headphones.jpg) no-repeat center;
   background-size: cover;
   z-index: 1;
 }
@@ -188,7 +188,7 @@ button {
 #right .rotate {
   -webkit-animation: rot 1s ease infinite;
           animation: rot 1s ease infinite;
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 @-webkit-keyframes rot {
@@ -229,7 +229,8 @@ button {
         grid-template-columns: 100%;
     -ms-grid-rows: 6em auto;
         grid-template-rows: 6em auto;
-        grid-template-areas: 'left' 'right';
+        grid-template-areas: 'left'
+ 'right';
   }
   #main-card #left {
     -ms-grid-row: 1;

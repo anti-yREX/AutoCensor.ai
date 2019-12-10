@@ -17,6 +17,11 @@ function dropHandler(ev) {
           document.getElementById('audio_name').textContent = file.name;
           original_audio = file.name;
           call(file.name);
+
+          let hiddenElemennts = document.querySelectorAll('.hide-on-drop');
+          hiddenElemennts.forEach((element) => {
+            element.classList.add('hide');
+          });
           document.getElementById('loader').classList.add('rotate');
         }
       }
@@ -41,10 +46,6 @@ function call(message){
     data: JSON.stringify({ "message": message })
   }).done(function (data) {
     document.getElementById("original_audio").setAttribute('src', `audios/${original_audio}`);
-    let hiddenElemennts = document.querySelectorAll('.hide-on-drop');
-    hiddenElemennts.forEach((element) => {
-      element.classList.add('hide');
-    });
     document.getElementById('loader').classList.remove('rotate');
     document.querySelector('.show-on-drop').classList.remove('hide');
     // console.log(original_audio)
