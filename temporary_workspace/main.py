@@ -20,6 +20,7 @@
 
 import wave
 from speech_recog import speech_recognition
+from flask import Flask, request, jsonify
 
 def make_dst(src):
     i = len(src) - 1
@@ -97,6 +98,21 @@ def compute(src):
     return "ERROR"
     #Make rslt to json
 
+app = Flask(__name__)
+
+@app.route('/api/', methods=["POST"])
+def main_interface():
+    response = request.get_json()
+    print(response["message"])
+    response["message"]=compute(response["message"])
+    return jsonify(response)
+
+@app.after_request
+def add_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    return response
+    
 if __name__ == "__main__":
-    compute("audios/audio1_wav.wav")
+    app.run(debug=True)
     pass
