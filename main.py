@@ -104,7 +104,7 @@ app = Flask(__name__)
 def main_interface():
     response = request.get_json()
     print(response["message"])
-    response["message"]=compute(response["message"])
+    response["message"]=compute("audios/"+response["message"])
     return jsonify(response)
 
 @app.after_request

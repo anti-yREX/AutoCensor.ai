@@ -45,7 +45,9 @@ function call(message){
       contentType: "application/json",
       data: JSON.stringify({"message": message})
   }).done(function (data) {
-      document.getElementById("original_audio").src = `audios/${original_audio}`;
-      document.getElementById("censored_audio").src = data.message;
+      document.getElementById("original_audio").setAttribute('src', `audios/${original_audio}`);
+      
+      // console.log(original_audio)
+      document.getElementById("censored_audio").setAttribute('src', data.message);
   })
 }
