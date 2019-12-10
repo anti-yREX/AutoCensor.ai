@@ -17,7 +17,7 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div id="main-card" class="round-corner-medium">
+        <div id="main-card" class="round-corner-medium">                      
                 <svg class="hide-on-mobile" id="circle1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 558 558">
                     <defs>
                       <linearGradient id="linear-gradient" x1="1.022" y1="0.063" x2="0.022" y2="0.936" gradientUnits="objectBoundingBox">
@@ -44,7 +44,10 @@
                 </svg>                  
             </div>
 
-            <div id="right" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+            <div id="right" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">         
+                <svg id="loader" xmlns="http://www.w3.org/2000/svg" width="64" height="64.001" viewBox="0 0 64 64.001">
+                  <path id="Subtraction_1" data-name="Subtraction 1" d="M39,14a31.8,31.8,0,0,1-12.455-2.515A31.893,31.893,0,0,1,16.373,4.628,31.894,31.894,0,0,1,9.515-5.544,31.8,31.8,0,0,1,7-18,31.8,31.8,0,0,1,9.515-30.456a31.894,31.894,0,0,1,6.858-10.172,31.893,31.893,0,0,1,10.171-6.858A31.8,31.8,0,0,1,39-50a31.8,31.8,0,0,1,12.456,2.515,31.894,31.894,0,0,1,10.172,6.858,31.894,31.894,0,0,1,6.858,10.172A31.8,31.8,0,0,1,71-18,31.8,31.8,0,0,1,68.485-5.544,31.894,31.894,0,0,1,61.627,4.628a31.894,31.894,0,0,1-10.172,6.858A31.8,31.8,0,0,1,39,14ZM29.75-35,20-18,29.75-1h19.5L59-18,49.25-35Z" transform="translate(-7 50)" fill="#3981ff"/>
+                </svg>       
                 <div class="hide-on-drop icon-container round-corner-medium">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="58.52" viewBox="0 0 48 58.52">
                             <defs>
@@ -66,14 +69,13 @@
                 <h3 class="hide-on-drop hide-on-mobile">Drag and drop audio file</h3>
                 <h3 class="hide-on-drop" id="file-name"></h3>
                 <section class="show-on-drop hide">
-                    <h3><span id="audio_name"></span>Original audio file</h3>
-                    <br>
+                    <h2 style="width: 100%;"><span id="audio_name"></span></h2>
                     <audio id="original_audio" controls>
                       <source  src="">
                     </audio> 
                     <h3>Censored audio file</h3>
                     <audio id="censored_audio" controls>
-                        <source src="" >
+                        <source src="">
                     </audio>
                 </section>
             </div>

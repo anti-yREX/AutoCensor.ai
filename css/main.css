@@ -94,7 +94,7 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background: url(../images/headphones.jpg) no-repeat center;
+  background: url(/images/headphones.jpg) no-repeat center;
   background-size: cover;
   z-index: 1;
 }
@@ -118,6 +118,7 @@ button {
 }
 
 #right {
+  position: relative;
   z-index: 1;
   -ms-grid-row: 1;
   -ms-grid-column: 2;
@@ -173,6 +174,45 @@ button {
   width: 100%;
 }
 
+#right #loader {
+  position: absolute;
+  top: calc(50% - 1em);
+  z-index: 5;
+  opacity: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+#right .rotate {
+  -webkit-animation: rot 1s ease infinite;
+          animation: rot 1s ease infinite;
+  opacity: 1;
+}
+
+@-webkit-keyframes rot {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+@keyframes rot {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
 @media screen and (min-width: 1280px) {
   #main-card {
     height: 90vh;
@@ -189,8 +229,7 @@ button {
         grid-template-columns: 100%;
     -ms-grid-rows: 6em auto;
         grid-template-rows: 6em auto;
-        grid-template-areas: 'left'
- 'right';
+        grid-template-areas: 'left' 'right';
   }
   #main-card #left {
     -ms-grid-row: 1;

@@ -96,6 +96,7 @@ button{
     }
 }
 #right{
+    position: relative;
     z-index: 1;
     grid-area: right;
     justify-content: center;
@@ -131,6 +132,25 @@ button{
     }
     section{
         width: 100%;
+    }
+    #loader{
+        position: absolute;
+        top: calc(50% - 1em);
+        z-index: 5;
+        opacity: 0;
+        user-select: none;
+    }
+    .rotate{
+        animation: rot 1s ease infinite;
+        opacity: 1;
+    }
+    @keyframes rot{
+        0%{
+            transform: rotate(0deg);
+        }
+        100%{
+            transform: rotate(359deg);
+        }
     }
 }
 

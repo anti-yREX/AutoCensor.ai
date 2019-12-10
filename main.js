@@ -1,4 +1,5 @@
 //jshint esversion: 6
+
 let original_audio;
 function dropHandler(ev) {
     console.log('File(s) dropped');
@@ -15,8 +16,8 @@ function dropHandler(ev) {
             console.log('... file[' + i + '].name = ' + file.name);
           document.getElementById('audio_name').textContent = file.name;
           original_audio = file.name;
-          console.log(file.name);
           call(file.name);
+          document.getElementById('loader').classList.add('rotate');
         }
       }
     } else {
@@ -25,12 +26,6 @@ function dropHandler(ev) {
         console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
       }
   }
-  let hiddenElemennts = document.querySelectorAll('.hide-on-drop');
-  hiddenElemennts.forEach((element) => { 
-    element.classList.add('hide');
-  });
-
-  document.querySelector('.show-on-drop').classList.remove('hide');
 }
   
 function dragOverHandler(ev) {
@@ -40,14 +35,19 @@ function dragOverHandler(ev) {
 
 function call(message){
   $.ajax({
-      url: "http://localhost:5000/api/",
-      type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify({"message": message})
+    url: "http://localhost:5000/api/",
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({ "message": message })
   }).done(function (data) {
-      document.getElementById("original_audio").setAttribute('src', `audios/${original_audio}`);
-      
-      // console.log(original_audio)
-      document.getElementById("censored_audio").setAttribute('src', data.message);
-  })
+    document.getElementById("original_audio").setAttribute('src', `audios/${original_audio}`);
+    let hiddenElemennts = document.querySelectorAll('.hide-on-drop');
+    hiddenElemennts.forEach((element) => {
+      element.classList.add('hide');
+    });
+    document.getElementById('loader').classList.remove('rotate');
+    document.querySelector('.show-on-drop').classList.remove('hide');
+    // console.log(original_audio)
+    document.getElementById("censored_audio").setAttribute('src', data.message);
+  });
 }
