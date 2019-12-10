@@ -19,8 +19,8 @@
 """
 
 import wave
-
 from speech_recog import speech_recognition
+
 def make_dst(src):
     i = len(src) - 1
     while(i >= 0):
@@ -93,7 +93,8 @@ def compute(src):
     flg , st, ed =  check_language(rslt)
     if(flg==1):
         src = beep(src, st, ed)
-        print(src)
+        return src
+    return "ERROR"
     #Make rslt to json
 
 if __name__ == "__main__":

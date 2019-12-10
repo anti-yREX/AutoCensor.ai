@@ -76,3 +76,23 @@
     src = "audios/audio1.mp3"
     src = convert_mp3_to_raw(src)
 """
+
+#  Recieve from Front End
+from flask import Flask, request, jsonify
+from main import *
+app = Flask(__name__)
+
+@app.route('/api/', methods=["POST"])
+def main_interface():
+    response = request.get_json()
+    print(response["message"])
+    response["message"]=compute(response["message"])
+    return jsonify(response)
+
+@app.after_request
+def add_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    return response
+if __name__ == '__main__':
+    app.run(debug=True)  
