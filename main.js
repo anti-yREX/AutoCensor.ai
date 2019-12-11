@@ -49,6 +49,11 @@ function call(message){
     document.getElementById('loader').classList.remove('rotate');
     document.querySelector('.show-on-drop').classList.remove('hide');
     // console.log(original_audio)
-    document.getElementById("censored_audio").setAttribute('src', data.message);
+    if(data.message != "No_Censor"){
+      document.getElementById("censored_audio").setAttribute('src', data.message);
+    } else {
+      document.getElementById("no").innerHTML = "No Censor Done on Audio"
+      document.getElementById("censored_audio").setAttribute('src', `audios/${original_audio}`);
+    }
   });
 }

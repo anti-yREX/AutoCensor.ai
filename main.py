@@ -69,7 +69,7 @@ def beep(src, strt, end):
     return dst
 
 def check_language(rslt):
-    chk_list = {'milliseconds'}
+    chk_list = {'millseconds'}
     flg = 0
     word_list = rslt.results[0].alternatives[0].words
     len_word_list= len(word_list)
@@ -80,12 +80,12 @@ def check_language(rslt):
             n = i
             break
     
-    print(n)
-    print(word_list[n])
-    st = word_list[n].start_time.seconds + (word_list[n].start_time.nanos/1000000000)
-    ed = word_list[n].end_time.seconds + (word_list[n].end_time.nanos/1000000000)
-    print(st)
-    print(ed)
+    if(flg != 1):
+        st =  ed  =  None
+    else:
+        print(word_list[n])
+        st = word_list[n].start_time.seconds + (word_list[n].start_time.nanos/1000000000)
+        ed = word_list[n].end_time.seconds + (word_list[n].end_time.nanos/1000000000)
     return flg, st, ed
 
 
@@ -95,7 +95,8 @@ def compute(src):
     if(flg==1):
         src = beep(src, st, ed)
         return src
-    return "ERROR"
+    print("No Censoring was done on the Audio")
+    return "No_Censor"
     #Make rslt to json
 
 app = Flask(__name__)
