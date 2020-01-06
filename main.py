@@ -69,7 +69,7 @@ def beep(src, strt, end):
     return dst
 
 def check_language(rslt):
-    chk_list = {'millseconds'}
+    chk_list = {'milliseconds'}
     flg = 0
     word_list = rslt.results[0].alternatives[0].words
     len_word_list= len(word_list)
