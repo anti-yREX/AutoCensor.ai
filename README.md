@@ -2,8 +2,8 @@
 
 This web app allows automatic censoring of audio files using machine learning and audio processing.
 
-# Update - Dec 11, 2019 - Prototype Phase
-
+<h3>Update - Dec 11, 2019 - Prototype Phase</h3>
+<a href="https://ibb.co/p0SbBky"><img src="https://i.ibb.co/C1fm3S2/Prototype.png" alt="Prototype" border="0"></a>
 <h3>AutoCensor API -</h3>
 <ul>
     <li>Central API that controls everything.</li>
@@ -28,9 +28,9 @@ This web app allows automatic censoring of audio files using machine learning an
 
 <h3>Future -</h3>
 <ul>
-    <li>This is Project is right now in a Prototype Phase.</li>
-    <li>Try to Implement better Speech Recognition.</li>
-    <li>Real Time implementation for Live Streaming.</li>
+    <li>This Project is in a Prototype Phase.</li>
+    <li>In Future we are going to try to implement better Speech Recognition.</li>
+    <li>Real-Time implementation for Live Streaming.</li>
     <li>Better Editing Tools.</li>
     <li>Implement Deep Learning Model to Recognize Explicit Content.</li>
 </ul>
