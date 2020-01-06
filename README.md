@@ -20,10 +20,10 @@ This web app allows automatic censoring of audio files using machine learning an
 
 <h3>Other -</h3>
 <ul>
-    <li>Central API controls all the other modules too.<br>
-    <li>FIle System is used to access the Audio file to be processed.<br>
-    <li>Google Speech-To-Text API is used by get the precise transcript of the audio.<br>
-    <li>Audio Processing Module is used to process the Given Audio.<br>
+    <li>Central API controls all the other modules too.</li>
+    <li>FIle System is used to access the Audio file to be processed.</li>
+    <li>Google Speech-To-Text API is used by get the precise transcript of the audio.</li>
+    <li>Audio Processing Module is used to process the Given Audio.</li>
 </ul>
 
 <h3>Future -</h3>
