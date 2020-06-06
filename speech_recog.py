@@ -36,7 +36,7 @@ def speech_recognition(file_name):
       print("Audio Contents:\n" + str(arr))
 
   except sr.UnknownValueError:
-      print("Google Speech Cannotbe recognised")
+      print("Google Speech Cannot be recognised")
 
   except sr.RequestError as e:
       print("Could not request results from Google Speech RecognitionServive; {0}".format(e))
