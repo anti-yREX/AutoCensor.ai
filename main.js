@@ -36,7 +36,7 @@ function proccessRequest() {
 		setTimeout(() => {
 			showPage('result_page')
 		}, 2000);
-		//	sendFile(originalFileName, censoredWord)
+		sendFile(originalFileName, censoredWord)
 	}
 }
 
@@ -112,18 +112,18 @@ function showCensorWordInput() {
 async function sendFile(fileName, word) {
 	const response = await fetch('http://localhost:5000/api/', {
 		method: 'post',
-		body: JSON.stringify({ "message": { fileName: fileName, word: word } })
+		body: JSON.stringify({ fileName: fileName, word: word })
 	}),
 		data = await response.json();
-	document.getElementById("originalFileName").setAttribute('src', `audios/${originalFileName}`);
-	document.getElementById('loader').classList.remove('rotate');
-	document.querySelector('.show-on-drop').classList.remove('hide');
-	if (data.message != "No_Censor") {
-		document.getElementById("censored_audio").setAttribute('src', data.message);
-	} else {
-		document.getElementById("no").textContent = "No Censor Done on Audio"
-		document.getElementById("censored_audio").setAttribute('src', `audios/${originalFileName}`);
-	}
+	// document.getElementById("originalFileName").setAttribute('src', `audios/${originalFileName}`);
+	// document.getElementById('loader').classList.remove('rotate');
+	// document.querySelector('.show-on-drop').classList.remove('hide');
+	// if (data.message != "No_Censor") {
+	// 	document.getElementById("censored_audio").setAttribute('src', data.message);
+	// } else {
+	// 	document.getElementById("no").textContent = "No Censor Done on Audio"
+	// 	document.getElementById("censored_audio").setAttribute('src', `audios/${originalFileName}`);
+	// }
 }
 
 /*function call(message) {

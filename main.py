@@ -21,6 +21,7 @@
 """
 
 import wave
+import json
 from speech_recog import speech_recognition
 from flask import Flask, request, jsonify
 
@@ -38,7 +39,12 @@ def make_dst(src):
     dst  = dst + "_edited.wav"
     return dst
 
-
+def format_words(words, check_word):
+    transcript = []
+    for word in words:
+        element = { 'word': word.word, 'censored': (word.word == check_word) }
+        transcript.append(element)
+    return transcript
 
 def beep(src, strt, end):
     dst = make_dst(src)
@@ -70,8 +76,8 @@ def beep(src, strt, end):
     a.close()
     return dst
 
-def check_language(rslt):
-    chk_list = {'milliseconds'}
+def check_language(rslt, word):
+    chk_list = { word }
     flg = 0
     word_list = rslt.results[0].alternatives[0].words
     len_word_list= len(word_list)
@@ -91,22 +97,29 @@ def check_language(rslt):
     return flg, st, ed
 
 
-def compute(src):
-    rslt = speech_recognition(src)
-    flg , st, ed =  check_language(rslt)
+def compute(filename, word):
+    rslt = speech_recognition(filename)
+    flg , st, ed =  check_language(rslt, word)
+    transcript = format_words(words = rslt.results[0].alternatives[0].words, check_word = word)
     if(flg==1):
-        src = beep(src, st, ed)
-        return src
+        src = beep(filename, st, ed)
+        return src, transcript
     print("No Censoring was done on the Audio")
-    return "No_Censor"
+    return False, transcript
     #Make rslt to json
 
 app = Flask(__name__)
 @app.route('/api/', methods=["POST"])
 def main_interface():
-    response = request.get_json()
-    print(response["message"])
-    response["message"]=compute("audios/"+response["message"])
+    req = json.loads((request.get_data()).decode('utf-8'))
+    print("------------------")
+    filename = "audios/"+req['fileName']
+    word = req['word']
+    print(filename)
+    print(word)
+    filename, words = compute(filename = filename, word = word)
+    response = {'fileName':filename, 'words' : words }
+    print(response)
     return jsonify(response)
 
 @app.after_request
