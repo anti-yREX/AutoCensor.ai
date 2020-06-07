@@ -32,8 +32,10 @@ function proccessRequest() {
 	if (censoredWord.trim() === '')
 		alert('Please enter a word to censor')
 	else {
-		document.getElementById('main_page').classList.add('hide')
-		document.getElementById('result_page').classList.remove('hide')
+		showPage('loader_page')
+		setTimeout(() => {
+			showPage('result_page')
+		}, 2000);
 		//	sendFile(originalFileName, censoredWord)
 	}
 }
@@ -83,6 +85,14 @@ function renderWords(words) {
 	document.getElementById('word_container').append(frag)
 }
 renderWords(words)
+
+let allPages = document.querySelectorAll('.page')
+function showPage(page) {
+	allPages.forEach(page => {
+		page.classList.add('hide')
+	})
+	document.getElementById(page).classList.remove('hide')
+}
 
 function dragOverHandler(ev) {
 	this.classList.add('highlight')
