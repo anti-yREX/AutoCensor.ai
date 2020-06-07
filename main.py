@@ -1,4 +1,6 @@
 """  ===> TO DO
+-> $env:GOOGLE_APPLICATION_CREDENTIALS="autocensor.json"
+-> & C:/Users/rituraj/AppData/Local/Programs/Python/Python37-32/python.exe c:/Users/rituraj/Documents/GitHub/AutoCensor.ai/main.py
 
         0 -> Receive Request
 
@@ -43,7 +45,7 @@ def beep(src, strt, end):
     
     beep = "audios/unit_beep.wav"
     b = wave.open(beep, 'r')
-
+    
     #1 Read the Audio File
     a = wave.open(src, 'r')
     t = wave.open(dst, 'w')
@@ -100,7 +102,6 @@ def compute(src):
     #Make rslt to json
 
 app = Flask(__name__)
-
 @app.route('/api/', methods=["POST"])
 def main_interface():
     response = request.get_json()
