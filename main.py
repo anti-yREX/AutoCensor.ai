@@ -42,7 +42,9 @@ def make_dst(src):
 def format_words(words, check_word):
     transcript = []
     for word in words:
-        element = { 'word': word.word, 'censored': (word.word == check_word) }
+        element = { 'word': word.word }
+        if (word.word == check_word) :
+            element['censored'] = True 
         transcript.append(element)
     return transcript
 
