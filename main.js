@@ -287,8 +287,9 @@ customElements.define('sm-audio', class extends HTMLElement{
 		})
 		observer.observe(this)
 		this.audio.addEventListener('timeupdate', e => {
-			let minutes = Math.floor(this.audio.currentTime / 60),
-				seconds = Math.floor(this.audio.currentTime),
+			let time = this.audio.currentTime,
+				minutes = Math.floor(time / 60),
+				seconds = Math.floor(time - minutes * 60),
 				y = seconds < 10 ? "0" + seconds : seconds;
 			this.shadowRoot.querySelector('.current-time').textContent = `${minutes}:${y}`
 			this.shadowRoot.querySelector('.track').style.width = (width / this.audio.duration) * this.audio.currentTime + 'px'
@@ -301,8 +302,9 @@ customElements.define('sm-audio', class extends HTMLElement{
 				if (this.hasAttribute('src') && newValue.trim() !== '') {
 					this.shadowRoot.querySelector('audio').src = newValue;
 					this.shadowRoot.querySelector('audio').onloadedmetadata = () => {
-						let minutes = Math.floor(this.audio.duration / 60),
-							seconds = Math.floor(this.audio.duration),
+						let duration = this.audio.duration,
+							minutes = Math.floor(duration / 60),
+							seconds = Math.floor(duration - minutes * 60),
 							y = seconds < 10 ? "0" + seconds : seconds;
 						this.shadowRoot.querySelector('.duration').textContent = `${minutes}:${y}`;
 					}
