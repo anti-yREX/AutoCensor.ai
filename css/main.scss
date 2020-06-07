@@ -53,7 +53,6 @@ header{
 #main_page{
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
     align-items: center;
     h1{
         font-size: 3rem;
@@ -76,10 +75,6 @@ header{
     }
     #drop_zone{
         align-items: center;
-    }
-    #get_censor_word_container{
-        width: 60%;
-        justify-self: center;
     }
     .right{
         height: 100%;
@@ -161,7 +156,6 @@ header{
 }
 #result_page{
     display: grid;
-    grid-template-columns: 2fr 1fr;
     align-self: flex-start;
     .left, .right{
         padding: 2vw 0;
@@ -204,5 +198,26 @@ header{
 
 sm-audio{
     margin-bottom: 2rem;
-    width: 24rem;
+    width: 100%;
+}
+@media screen and (min-width: 640px){
+    #main_page{
+        grid-template-columns: 1fr 1fr;
+    }
+    #get_censor_word_container{
+        width: 60%;
+        justify-self: center;
+    }
+    #result_page{
+        grid-template-columns: 2fr 1fr;
+    }
+    sm-audio{
+        width: 24rem;
+    }
+}
+
+@media screen and ( max-width: 640px){
+    .hide-on-mobile{
+        display: none !important;
+    }
 }
