@@ -33,9 +33,9 @@ function proccessRequest() {
 		alert('Please enter a word to censor')
 	else {
 		showPage('loader_page')
-		setTimeout(() => {
-			showPage('result_page')
-		}, 2000);
+		// setTimeout(() => {
+			
+		// }, 2000);
 		sendFile(originalFileName, censoredWord)
 	}
 }
@@ -80,7 +80,7 @@ function createWord(word, status) {
 function renderWords(words) {
 	document.getElementById('word_container').innerHTML = ''
 	words.forEach(word => {
-		frag.append(createWord(word.word, word.censored))
+		frag.append(createWord(word.word, word?.censored))
 	})
 	document.getElementById('word_container').append(frag)
 }
@@ -114,37 +114,14 @@ async function sendFile(fileName, word) {
 		method: 'post',
 		body: JSON.stringify({ fileName: fileName, word: word })
 	}),
-		data = await response.json();
-	// document.getElementById("originalFileName").setAttribute('src', `audios/${originalFileName}`);
-	// document.getElementById('loader').classList.remove('rotate');
-	// document.querySelector('.show-on-drop').classList.remove('hide');
-	// if (data.message != "No_Censor") {
-	// 	document.getElementById("censored_audio").setAttribute('src', data.message);
-	// } else {
-	// 	document.getElementById("no").textContent = "No Censor Done on Audio"
-	// 	document.getElementById("censored_audio").setAttribute('src', `audios/${originalFileName}`);
-	// }
+	data = await response.json();
+	const { fileName : file, words } = data;
+	console.log(data);
+	renderWords(words);
+	document.getElementById("original_audio").setAttribute('src', 'audios/' + fileName);
+	document.getElementById("censored_audio").setAttribute('src', file);
+	showPage('result_page');
 }
-
-/*function call(message) {
-	$.ajax({
-		url: "http://localhost:5000/api/",
-		type: "POST",
-		contentType: "application/json",
-		data: JSON.stringify({ "message": message })
-	}).done(function (data) {
-		document.getElementById("originalFileName").setAttribute('src', `audios/${originalFileName}`);
-		document.getElementById('loader').classList.remove('rotate');
-		document.querySelector('.show-on-drop').classList.remove('hide');
-		// console.log(originalFileName)
-		if (data.message != "No_Censor") {
-			document.getElementById("censored_audio").setAttribute('src', data.message);
-		} else {
-			document.getElementById("no").textContent = "No Censor Done on Audio"
-			document.getElementById("censored_audio").setAttribute('src', `audios/${originalFileName}`);
-		}
-	});
-}*/
 
 
 // web components

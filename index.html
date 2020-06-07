@@ -9,22 +9,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/main.css">
 	<script src="main.js" async defer></script>
-	<!--<script src="jquery.min.js"></script>-->
 </head>
 
 <body>
-	<!--<h3 class="hide-on-file-selected" id="file-name"></h3>
-	<section class="show-on-drop">
-		<h2 style="width: 100%;"><span id="audio_name"></span></h2>
-		<h3>Original audio file</h3>
-		<audio id="original_audio" controls>
-			<source src="">
-		</audio>
-		<h3 id="no">Censored audio file</h3>
-		<audio id="censored_audio" controls>
-			<source src="">
-		</audio>
-	</section>-->
 	<header><h4>AutoCensor.ai</h4></header>
 	<section class="page hide" id="loader_page">
 		<svg id="loader" class="icon" viewBox="0 0 64 64">
@@ -74,9 +61,9 @@
 		<div class="left">
 			<h3 id="censoring_result">Censoring Completed</h3>
 			<h4>Original Audio</h4>
-			<sm-audio id="original_audio" src="./everything.mp3"></sm-audio>
+			<sm-audio id="original_audio"></sm-audio>
 			<h4>Censored Audio</h4>
-			<sm-audio id="censored_audio" src="./everything.mp3"></sm-audio>
+			<sm-audio id="censored_audio"></sm-audio>
 		</div>
 		<div class="right">
 			<h4>Words from the audio</h4>
