@@ -142,6 +142,16 @@ async function sendFile(fileName, word) {
 const smAudio = document.createElement('template')
 smAudio.innerHTML = `
 <style>
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:host{
+	display: flex;
+}
+
 .audio{
   position: relative;
   display: -webkit-box;
@@ -154,13 +164,14 @@ smAudio.innerHTML = `
   border-radius: 0.2rem;
   background: rgba(var(--text), 0.08);
   overflow: hidden;
+  width: 100%;
 }
 
 .hide {
   display: none;
 }
 
-.icon {
+.icon{
   stroke: rgba(var(--text), 1);
   stroke-width: 6;
   stroke-linecap: round;
@@ -175,7 +186,7 @@ smAudio.innerHTML = `
   margin-right: 0.5rem;
 }
 
-.icon:hover {
+.icon:hover{
   background: rgba(var(--text), 0.1);
 }
 
@@ -220,7 +231,7 @@ audio {
 customElements.define('sm-audio', class extends HTMLElement{
 	constructor() {
 		super();
-		this.append(smAudio.content.cloneNode(true))
+		this.attachShadow({mode: 'open'}).append(smAudio.content.cloneNode(true))
 
 		this.playing = false;
 	}
@@ -243,10 +254,11 @@ customElements.define('sm-audio', class extends HTMLElement{
 	get isPlaying() {
 		return this.playing;
 	}
+
 	connectedCallback() {
-		this.playBtn = this.querySelector('.play');
-		this.pauseBtn = this.querySelector('.pause');
-		this.audio = this.querySelector('audio')
+		this.playBtn = this.shadowRoot.querySelector('.play');
+		this.pauseBtn = this.shadowRoot.querySelector('.pause');
+		this.audio = this.shadowRoot.querySelector('audio')
 		this.playBtn.addEventListener('click', e => {
 			this.play()
 		})
@@ -258,8 +270,8 @@ customElements.define('sm-audio', class extends HTMLElement{
 		})
 		let width;
 		let observer = new IntersectionObserver((entries, observer) => {
-				if (entries[0].isIntersecting)
-					width = this.querySelector('.audio').offsetWidth;
+			if (entries[0].isIntersecting)
+				width = this.shadowRoot.querySelector('.audio').offsetWidth;
 		}, {
 			threshold: 1
 		})
@@ -268,8 +280,8 @@ customElements.define('sm-audio', class extends HTMLElement{
 			let minutes = Math.floor(this.audio.currentTime / 60),
 				seconds = Math.floor(this.audio.currentTime),
 				y = seconds < 10 ? "0" + seconds : seconds;
-			this.querySelector('.current-time').textContent = `${minutes}:${y}`
-			this.querySelector('.track').style.width = (width / this.audio.duration) * this.audio.currentTime + 'px'
+			this.shadowRoot.querySelector('.current-time').textContent = `${minutes}:${y}`
+			this.shadowRoot.querySelector('.track').style.width = (width / this.audio.duration) * this.audio.currentTime + 'px'
 		})
 	}
 
@@ -277,12 +289,12 @@ customElements.define('sm-audio', class extends HTMLElement{
 		if (oldValue !== newValue) {
 			if (name === 'src') {
 				if (this.hasAttribute('src') && newValue.trim() !== '') {
-					this.querySelector('audio').src = newValue;
-					this.querySelector('audio').onloadedmetadata = () => {
+					this.shadowRoot.querySelector('audio').src = newValue;
+					this.shadowRoot.querySelector('audio').onloadedmetadata = () => {
 						let minutes = Math.floor(this.audio.duration / 60),
 							seconds = Math.floor(this.audio.duration),
 							y = seconds < 10 ? "0" + seconds : seconds;
-						this.querySelector('.duration').textContent = `${minutes}:${y}`;
+						this.shadowRoot.querySelector('.duration').textContent = `${minutes}:${y}`;
 					}
 				}
 				else

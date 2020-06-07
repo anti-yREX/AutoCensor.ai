@@ -268,8 +268,6 @@ header {
 }
 
 sm-audio {
-  display: -ms-grid;
-  display: grid;
   margin-bottom: 2rem;
   width: 24rem;
 }
