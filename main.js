@@ -1,5 +1,3 @@
-//jshint esversion: 6
-
 document.getElementById('drop_zone').addEventListener('drop', dropHandler)
 document.getElementById('drop_zone').addEventListener('dragover', dragOverHandler)
 document.getElementById('drop_zone').addEventListener('dragleave', dragLeaveHandler)
@@ -33,39 +31,9 @@ function proccessRequest() {
 		alert('Please enter a word to censor')
 	else {
 		showPage('loader_page')
-		// setTimeout(() => {
-			
-		// }, 2000);
 		sendFile(originalFileName, censoredWord)
 	}
 }
-
-let words = [
-	{
-		word: 'some',
-		censored: false
-	},
-	{
-		word: 'something',
-		censored: false
-	},
-	{
-		word: 'someth',
-		censored: true
-	},
-	{
-		word: 'something',
-		censored: false
-	},
-	{
-		word: 'something',
-		censored: false
-	},
-	{
-		word: 'something',
-		censored: false
-	},
-]
 
 let frag = document.createDocumentFragment();
 function createWord(word, status) {
@@ -84,7 +52,6 @@ function renderWords(words) {
 	})
 	document.getElementById('word_container').append(frag)
 }
-renderWords(words)
 
 let allPages = document.querySelectorAll('.page')
 function showPage(page) {
@@ -116,7 +83,6 @@ async function sendFile(fileName, word) {
 	}),
 	data = await response.json();
 	const { fileName : file, words } = data;
-	console.log(data);
 	renderWords(words);
 	document.getElementById("original_audio").setAttribute('src', 'audios/' + fileName);
 	document.getElementById("censored_audio").setAttribute('src', file);
@@ -256,13 +222,23 @@ customElements.define('sm-audio', class extends HTMLElement{
 			this.pause()
 		})
 		let width;
-		let observer = new IntersectionObserver((entries, observer) => {
-			if (entries[0].isIntersecting)
-				width = this.shadowRoot.querySelector('.audio').offsetWidth;
-		}, {
-			threshold: 1
-		})
-		observer.observe(this)
+		if ('ResizeObserver' in window) {
+			let resizeObserver = new ResizeObserver(entries => {
+				entries.forEach(entry => {
+					width = entry.contentRect.width;
+				})
+			})
+			resizeObserver.observe(this)
+		}
+		else {
+			let observer = new IntersectionObserver((entries, observer) => {
+				if (entries[0].isIntersecting)
+					width = this.shadowRoot.querySelector('.audio').offsetWidth;
+			}, {
+				threshold: 1
+			})
+			observer.observe(this)
+		}
 		this.audio.addEventListener('timeupdate', e => {
 			let time = this.audio.currentTime,
 				minutes = Math.floor(time / 60),
