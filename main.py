@@ -114,14 +114,15 @@ app = Flask(__name__)
 @app.route('/api/', methods=["POST"])
 def main_interface():
     req = json.loads((request.get_data()).decode('utf-8'))
-    print("------------------")
+    print("---------------------------------------")
     filename = "audios/"+req['fileName']
     word = req['word']
-    print(filename)
-    print(word)
+    print("Log :\nFilename : " + filename)
+    print("Word : " +  word)
     filename, words = compute(filename = filename, word = word)
     response = {'fileName':filename, 'words' : words }
     print(response)
+    print("---------------------------------------")
     return jsonify(response)
 
 @app.after_request

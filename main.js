@@ -85,7 +85,12 @@ async function sendFile(fileName, word) {
 	const { fileName : file, words } = data;
 	renderWords(words);
 	document.getElementById("original_audio").setAttribute('src', 'audios/' + fileName);
-	document.getElementById("censored_audio").setAttribute('src', file);
+	if (file) {
+		document.getElementById("censored_audio").setAttribute('src', file);
+	} else {
+		document.getElementById("censored_audio_title").innerText = 'No Censored Audio';
+		document.getElementById("censored_audio").setAttribute('src', 'audios/' + fileName);
+	}
 	showPage('result_page');
 }
 
